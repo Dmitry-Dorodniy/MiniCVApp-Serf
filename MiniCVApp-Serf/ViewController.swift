@@ -25,7 +25,7 @@ class ViewController: UIViewController {
         stackView.axis = .vertical
         stackView.alignment = .center
         stackView.spacing = 8
-        stackView.distribution = .equalSpacing
+//        stackView.distribution = .equalSpacing
        
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
@@ -73,6 +73,40 @@ class ViewController: UIViewController {
         return label
     }()
     
+    private lazy var skilsStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .fill
+//        stackView.spacing = 8
+//        stackView.distribution = .equalSpacing
+       
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private lazy var mySkillsLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Мои навыки"
+       
+        label.textAlignment = .left
+        label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private lazy var editImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "pencil")
+        return imageView
+    }()
+    
+    private lazy var tagsCollectionView: UICollectionView = {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        
+        return collectionView
+    }()
+    
+    
     
 
         // MARK: - Lifecycle
@@ -93,11 +127,16 @@ class ViewController: UIViewController {
         func setupHierarchy() {
             view.addSubview(profileLabel)
             view.addSubview(bioStackView)
+            view.addSubview(skilsStackView)
             
             bioStackView.addArrangedSubview(iconView)
             bioStackView.addArrangedSubview(nameLabel)
             bioStackView.addArrangedSubview(descrioptionLabel)
+            bioStackView.setCustomSpacing(3, after: descrioptionLabel)
             bioStackView.addArrangedSubview(cityLabel)
+            
+            skilsStackView.addArrangedSubview(mySkillsLabel)
+            skilsStackView.addArrangedSubview(editImageView)
         }
         
         func setupLayuot() {
@@ -111,7 +150,11 @@ class ViewController: UIViewController {
                 bioStackView.heightAnchor.constraint(equalToConstant: 244),
                 
                 iconView.heightAnchor.constraint(equalToConstant: 120),
-                iconView.widthAnchor.constraint(equalToConstant: 120)
+                iconView.widthAnchor.constraint(equalToConstant: 120),
+                
+                skilsStackView.topAnchor.constraint(equalTo: bioStackView.bottomAnchor, constant: 40),
+                skilsStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+                skilsStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
                 
             ])
         }
