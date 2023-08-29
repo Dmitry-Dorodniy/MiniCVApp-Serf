@@ -9,9 +9,10 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    var isEdit = false
     
-    
-    var tags: [String] = ["MVI/MVVM", "Kotlin Coroutines", "Room", "OkHttp", "DataStore", "WorkManager", "custom view", "DataStore", "ООП и SOLID" ]
+//    var tags: [String] = ["MVI/MVVM", "Kotlin routines", "Room", "OkHttp", "DataStore", "WorkManager", "custom view", "ООП и SOLID", "+"]
+    var tags = [Tag]()
     
     // MARK: - UI Elements
     
@@ -98,20 +99,69 @@ class ViewController: UIViewController {
         return label
     }()
     
-    private lazy var editImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "pencil")
-        return imageView
+//    private lazy var editImageView: UIImageView = {
+//        let imageView = UIImageView()
+//        imageView.image = UIImage(named: "pencil")
+//        return imageView
+//    }()
+    
+    private lazy var editButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.tintColor = .black
+        button.setImage(UIImage(named: "pencil"), for: .normal)
+        button.addTarget(self, action: #selector(didEditButtonPress), for: .touchUpInside)
+        return button
     }()
     
     private lazy var tagsCollectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-        collectionView.backgroundColor = .clear
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createCollectionLayout())
+        collectionView.backgroundColor = .systemBackground
         collectionView.register(TagCollectionViewCell.self, forCellWithReuseIdentifier: TagCollectionViewCell.identifier)
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
+    
+    private func createCollectionLayout() -> UICollectionViewLayout {
+        let spacing: CGFloat = 12
+        let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(57),
+                                              heightDimension: .fractionalHeight(1.0))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+//        item.contentInsets = .init(top: spacing, leading: spacing, bottom: spacing, trailing: spacing)
+        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(44))
+
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        
+        group.interItemSpacing = .fixed(spacing)
+//        group.contentInsets = .init(top: 0, leading: 0,
+//                                    bottom: 0, trailing: 0)
+        group.edgeSpacing = .init(leading: .none, top: .fixed(10), trailing: .none, bottom: .none)
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = .init(top: spacing, leading: spacing + 4,
+                                      bottom: spacing, trailing: spacing + 4)
+//        section.interGroupSpacing = spacing
+      
+        let layout = UICollectionViewCompositionalLayout(section: section)
+        return layout
+    }
+    
+    // MARK: - Actions
+    
+    @objc private func didEditButtonPress() {
+        if !isEdit {
+            tags.append(Tag(skill: "+"))
+        } else {
+            tags.removeLast()
+        }
+        
+        tagsCollectionView.reloadData()
+        isEdit.toggle()
+        editButton.setImage(isEdit ? UIImage(systemName: "checkmark.circle") : UIImage(named: "pencil") , for: .normal)
+        
+    }
     
     
     // MARK: - Lifecycle
@@ -122,17 +172,20 @@ class ViewController: UIViewController {
         setupView()
         setupHierarchy()
         setupLayuot()
+        
     }
-    
+
     // MARK: - Setups
     private func setupView() {
         view.backgroundColor = .systemGray5
+        tags = Tag.getData
     }
     
     private func setupHierarchy() {
         view.addSubview(profileLabel)
         view.addSubview(bioStackView)
         view.addSubview(skilsStackView)
+        view.addSubview(tagsCollectionView)
         
         bioStackView.addArrangedSubview(iconView)
         bioStackView.addArrangedSubview(nameLabel)
@@ -141,7 +194,7 @@ class ViewController: UIViewController {
         bioStackView.addArrangedSubview(cityLabel)
         
         skilsStackView.addArrangedSubview(mySkillsLabel)
-        skilsStackView.addArrangedSubview(editImageView)
+        skilsStackView.addArrangedSubview(editButton)
     }
     
     private func setupLayuot() {
@@ -160,6 +213,12 @@ class ViewController: UIViewController {
             skilsStackView.topAnchor.constraint(equalTo: bioStackView.bottomAnchor, constant: 40),
             skilsStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             skilsStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            skilsStackView.heightAnchor.constraint(equalToConstant: 24),
+            
+            tagsCollectionView.topAnchor.constraint(equalTo: skilsStackView.bottomAnchor, constant: 20),
+            tagsCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tagsCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tagsCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
             
         ])
     }
@@ -172,7 +231,21 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        return UICollectionViewCell()
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.identifier, for: indexPath) as? TagCollectionViewCell else { return UICollectionViewCell() }
+        
+        print(collectionView.bounds.size.width)
+        cell.configure(with: tags[indexPath.row].skill)
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.row == tags.count - 1, tags[indexPath.row].skill == "+" {
+            let cell = collectionView.cellForItem(at: indexPath)
+            UIView.animate(withDuration: 0.1, animations: { cell?.alpha = 0.5 }) { (completed) in
+                    UIView.animate(withDuration: 0.5, animations: { cell?.alpha = 1 })
+                }
+            print("+")
+        }
     }
 }
 

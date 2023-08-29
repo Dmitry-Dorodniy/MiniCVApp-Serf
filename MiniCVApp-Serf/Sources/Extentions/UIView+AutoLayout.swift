@@ -10,8 +10,8 @@ import UIKit
 extension UIView {
     func addSubViewsForAutoLayout(_ views: [UIView]) {
         views.forEach {
-            $0.translatesAutoresizingMaskIntoConstraints = false
             addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
         }
     }
 }

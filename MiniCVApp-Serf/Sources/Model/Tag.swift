@@ -12,5 +12,16 @@ struct Tag {
 }
 
 extension Tag {
-   
+    static var getData: [Tag] {
+        [Tag(skill: "MVI/MVVM"),
+         Tag(skill: "Kotlin very hard super complication compositional"),
+         Tag(skill: "Room"),
+         Tag(skill: "OkHttp"),
+         Tag(skill: "Swift UI"),
+         Tag(skill: "SPManager"),
+         Tag(skill: "VIPER"),
+         Tag(skill: "SOLID"),
+         Tag(skill: "REST API"),
+        ]
+    }
 }
