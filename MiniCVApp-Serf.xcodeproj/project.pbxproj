@@ -16,6 +16,8 @@
 		8A7E5D842A792BB700CA1E2C /* UIView+AutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7E5D832A792BB700CA1E2C /* UIView+AutoLayout.swift */; };
 		8A7E5D882A79720100CA1E2C /* TagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7E5D872A79720100CA1E2C /* TagCollectionViewCell.swift */; };
 		8A7E5D8B2A79770900CA1E2C /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7E5D8A2A79770900CA1E2C /* Tag.swift */; };
+		8A94724E2AA2019800DA191F /* UIAlert+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A94724D2AA2019800DA191F /* UIAlert+Ext.swift */; };
+		8A9472502AA246C800DA191F /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A94724F2AA246C800DA191F /* UIViewController+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		8A7E5D832A792BB700CA1E2C /* UIView+AutoLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+AutoLayout.swift"; sourceTree = "<group>"; };
 		8A7E5D872A79720100CA1E2C /* TagCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionViewCell.swift; sourceTree = "<group>"; };
 		8A7E5D8A2A79770900CA1E2C /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
+		8A94724D2AA2019800DA191F /* UIAlert+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlert+Ext.swift"; sourceTree = "<group>"; };
+		8A94724F2AA246C800DA191F /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +108,8 @@
 			children = (
 				8A7E5D832A792BB700CA1E2C /* UIView+AutoLayout.swift */,
 				8A76C93E2A94BAC000C0554A /* UIWindow+Ext.swift */,
+				8A94724D2AA2019800DA191F /* UIAlert+Ext.swift */,
+				8A94724F2AA246C800DA191F /* UIViewController+Ext.swift */,
 			);
 			path = Extentions;
 			sourceTree = "<group>";
@@ -192,7 +198,9 @@
 				8A7E5D702A79117200CA1E2C /* ViewController.swift in Sources */,
 				8A7E5D882A79720100CA1E2C /* TagCollectionViewCell.swift in Sources */,
 				8A7E5D6C2A79117200CA1E2C /* AppDelegate.swift in Sources */,
+				8A94724E2AA2019800DA191F /* UIAlert+Ext.swift in Sources */,
 				8A7E5D6E2A79117200CA1E2C /* SceneDelegate.swift in Sources */,
+				8A9472502AA246C800DA191F /* UIViewController+Ext.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

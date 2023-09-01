@@ -9,9 +9,12 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    var isEdit = false
+    var isEdit = false {
+        didSet {
+            editButton.setNeedsUpdateConfiguration()
+        }
+    }
     
-//    var tags: [String] = ["MVI/MVVM", "Kotlin routines", "Room", "OkHttp", "DataStore", "WorkManager", "custom view", "ООП и SOLID", "+"]
     var tags = [Tag]()
     
     // MARK: - UI Elements
@@ -106,9 +109,15 @@ class ViewController: UIViewController {
 //    }()
     
     private lazy var editButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.tintColor = .black
-        button.setImage(UIImage(named: "pencil"), for: .normal)
+        var configuration = UIButton.Configuration.plain()
+        configuration.baseForegroundColor = .black
+        let handler: UIButton.ConfigurationUpdateHandler = { button in
+            button.configuration?.image = self.isEdit ? UIImage(named: "pencil") : UIImage(systemName: "checkmark.circle")
+            }
+        
+        let button = UIButton(configuration: configuration)
+        button.configurationUpdateHandler = handler
+
         button.addTarget(self, action: #selector(didEditButtonPress), for: .touchUpInside)
         return button
     }()
@@ -128,21 +137,17 @@ class ViewController: UIViewController {
         let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(57),
                                               heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-//        item.contentInsets = .init(top: spacing, leading: spacing, bottom: spacing, trailing: spacing)
         
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(44))
 
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
         group.interItemSpacing = .fixed(spacing)
-//        group.contentInsets = .init(top: 0, leading: 0,
-//                                    bottom: 0, trailing: 0)
         group.edgeSpacing = .init(leading: .none, top: .fixed(10), trailing: .none, bottom: .none)
         
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = .init(top: spacing, leading: spacing + 4,
                                       bottom: spacing, trailing: spacing + 4)
-//        section.interGroupSpacing = spacing
       
         let layout = UICollectionViewCompositionalLayout(section: section)
         return layout
@@ -159,8 +164,6 @@ class ViewController: UIViewController {
         
         tagsCollectionView.reloadData()
         isEdit.toggle()
-        editButton.setImage(isEdit ? UIImage(systemName: "checkmark.circle") : UIImage(named: "pencil") , for: .normal)
-        
     }
     
     
@@ -172,12 +175,12 @@ class ViewController: UIViewController {
         setupView()
         setupHierarchy()
         setupLayuot()
-        
     }
 
     // MARK: - Setups
     private func setupView() {
         view.backgroundColor = .systemGray5
+        dismissKeyboard()
         tags = Tag.getData
     }
     
@@ -244,6 +247,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
             UIView.animate(withDuration: 0.1, animations: { cell?.alpha = 0.5 }) { (completed) in
                     UIView.animate(withDuration: 0.5, animations: { cell?.alpha = 1 })
                 }
+            showAlert(withTitle: "Добавление навыка", message: "Введите название навыка которым вы владеете")
             print("+")
         }
     }
