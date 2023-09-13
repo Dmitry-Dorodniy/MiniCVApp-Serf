@@ -233,11 +233,10 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
+        let tag = tags[indexPath.row].skill
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.identifier, for: indexPath) as? TagCollectionViewCell else { return UICollectionViewCell() }
-        
-        print(collectionView.bounds.size.width)
-        cell.configure(with: tags[indexPath.row].skill)
+//        print(collectionView.bounds.size.width)
+        cell.configure(with: tag)
         return cell
     }
     
@@ -247,7 +246,9 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
             UIView.animate(withDuration: 0.1, animations: { cell?.alpha = 0.5 }) { (completed) in
                     UIView.animate(withDuration: 0.5, animations: { cell?.alpha = 1 })
                 }
-            showAlert(withTitle: "Добавление навыка", message: "Введите название навыка которым вы владеете")
+            showAlert(withTitle: "Добавление навыка", message: "Введите название навыка которым вы владеете") { text in
+                print("Добавлено: \(text)")
+            }
             print("+")
         }
     }

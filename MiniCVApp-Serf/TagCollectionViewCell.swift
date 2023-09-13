@@ -20,6 +20,12 @@ class TagCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
+    private lazy var plusButton: UIButton = {
+        let button = UIButton(type: .system)
+        
+        return button
+    }()
+    
     func configure(with data: String) {
         tagLable.text = data
         tagLable.sizeToFit()
