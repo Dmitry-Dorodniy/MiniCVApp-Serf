@@ -112,7 +112,7 @@ class ViewController: UIViewController {
         var configuration = UIButton.Configuration.plain()
         configuration.baseForegroundColor = .black
         let handler: UIButton.ConfigurationUpdateHandler = { button in
-            button.configuration?.image = self.isEdit ? UIImage(named: "pencil") : UIImage(systemName: "checkmark.circle")
+            button.configuration?.image = self.isEdit ? UIImage(systemName: "checkmark.circle") : UIImage(named: "pencil")
             }
         
         let button = UIButton(configuration: configuration)
@@ -235,21 +235,23 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let tag = tags[indexPath.row].skill
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.identifier, for: indexPath) as? TagCollectionViewCell else { return UICollectionViewCell() }
-//        print(collectionView.bounds.size.width)
         cell.configure(with: tag)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) else { return }
+        
         if indexPath.row == tags.count - 1, tags[indexPath.row].skill == "+" {
-            let cell = collectionView.cellForItem(at: indexPath)
-            UIView.animate(withDuration: 0.1, animations: { cell?.alpha = 0.5 }) { (completed) in
-                    UIView.animate(withDuration: 0.5, animations: { cell?.alpha = 1 })
+            UIView.animate(withDuration: 0.1, animations: { cell.alpha = 0.5 }) { (completed) in
+                    UIView.animate(withDuration: 0.5, animations: { cell.alpha = 1 })
                 }
-            showAlert(withTitle: "Добавление навыка", message: "Введите название навыка которым вы владеете") { text in
-                print("Добавлено: \(text)")
+            
+            showAlert(withTitle: "Добавление навыка", message: "Введите название навыка которым вы владеете") { newSkill in
+                print("Добавлено: \(newSkill)")
+                self.tags.insert(Tag(skill: newSkill), at: self.tags.count - 1)
+                collectionView.reloadData()
             }
-            print("+")
         }
     }
 }
