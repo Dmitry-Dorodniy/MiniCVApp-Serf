@@ -17,7 +17,7 @@ extension UIViewController {
         
         let cancelAction = UIAlertAction(title: "Oтмена", style: .cancel)
         let addAction = UIAlertAction(title: "Добавить", style: .default) { _ in
-            if let textField = alertController.textFields?.first, let text = textField.text {
+            if let textField = alertController.textFields?.first, let text = textField.text, !text.isEmpty {
                 action(text)
             }
         }

@@ -243,7 +243,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
         guard let cell = collectionView.cellForItem(at: indexPath) else { return }
         
         if indexPath.row == tags.count - 1, tags[indexPath.row].skill == "+" {
-            UIView.animate(withDuration: 0.1, animations: { cell.alpha = 0.5 }) { (completed) in
+            UIView.animate(withDuration: 0, animations: { cell.alpha = 0.5 }) { (completed) in
                     UIView.animate(withDuration: 0.5, animations: { cell.alpha = 1 })
                 }
             
