@@ -235,7 +235,13 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let tag = tags[indexPath.row].skill
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.identifier, for: indexPath) as? TagCollectionViewCell else { return UICollectionViewCell() }
+        cell.isEdit = isEdit
         cell.configure(with: tag)
+        cell.tapHandler = { [weak self] in
+            guard let self = self else { return }
+            tags.remove(at: indexPath.row)
+            collectionView.reloadData()
+        }
         return cell
     }
     
