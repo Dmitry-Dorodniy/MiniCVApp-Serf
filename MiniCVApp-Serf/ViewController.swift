@@ -14,8 +14,7 @@ class ViewController: UIViewController {
             editButton.setNeedsUpdateConfiguration()
         }
     }
-    
-    var tags = [Tag]()
+    var tags = Tag.getData
     
     // MARK: - UI Elements
     
@@ -24,7 +23,6 @@ class ViewController: UIViewController {
         label.text = "Профиль"
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -33,18 +31,14 @@ class ViewController: UIViewController {
         stackView.axis = .vertical
         stackView.alignment = .center
         stackView.spacing = 8
-        //        stackView.distribution = .equalSpacing
-        
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
     
     private lazy var iconView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "icon")
-        imageView.layer.cornerRadius = 60
+        imageView.layer.cornerRadius = 75
         imageView.layer.masksToBounds = true
-        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
@@ -55,7 +49,6 @@ class ViewController: UIViewController {
         
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -67,7 +60,6 @@ class ViewController: UIViewController {
         //        label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         label.textColor = .systemGray
         label.adjustsFontSizeToFitWidth = true
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -85,10 +77,6 @@ class ViewController: UIViewController {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.alignment = .fill
-        //        stackView.spacing = 8
-        //        stackView.distribution = .equalSpacing
-        
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
     
@@ -98,15 +86,8 @@ class ViewController: UIViewController {
         
         label.textAlignment = .left
         label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
-//    private lazy var editImageView: UIImageView = {
-//        let imageView = UIImageView()
-//        imageView.image = UIImage(named: "pencil")
-//        return imageView
-//    }()
     
     private lazy var editButton: UIButton = {
         var configuration = UIButton.Configuration.plain()
@@ -132,6 +113,7 @@ class ViewController: UIViewController {
         return collectionView
     }()
     
+    // MARK: - Private Functions
     private func createCollectionLayout() -> UICollectionViewLayout {
         let spacing: CGFloat = 12
         let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(57),
@@ -181,14 +163,14 @@ class ViewController: UIViewController {
     private func setupView() {
         view.backgroundColor = .systemGray5
         dismissKeyboard()
-        tags = Tag.getData
+//        tags = Tag.getData
     }
     
     private func setupHierarchy() {
-        view.addSubview(profileLabel)
-        view.addSubview(bioStackView)
-        view.addSubview(skilsStackView)
-        view.addSubview(tagsCollectionView)
+        view.addSubViewsForAutoLayout([profileLabel,
+                                       bioStackView,
+                                       skilsStackView,
+                                       tagsCollectionView])
         
         bioStackView.addArrangedSubview(iconView)
         bioStackView.addArrangedSubview(nameLabel)
@@ -210,8 +192,8 @@ class ViewController: UIViewController {
             bioStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -51),
             bioStackView.heightAnchor.constraint(equalToConstant: 244),
             
-            iconView.heightAnchor.constraint(equalToConstant: 120),
-            iconView.widthAnchor.constraint(equalToConstant: 120),
+            iconView.heightAnchor.constraint(equalToConstant: 150),
+            iconView.widthAnchor.constraint(equalToConstant: 150),
             
             skilsStackView.topAnchor.constraint(equalTo: bioStackView.bottomAnchor, constant: 40),
             skilsStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
@@ -262,3 +244,6 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     }
 }
 
+#Preview {
+    ViewController()
+}
