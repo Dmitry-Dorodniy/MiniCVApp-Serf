@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8A183C882AC49B64001FDA65 /* SkillsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A183C872AC49B64001FDA65 /* SkillsViewController.swift */; };
 		8A76C93F2A94BAC000C0554A /* UIWindow+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A76C93E2A94BAC000C0554A /* UIWindow+Ext.swift */; };
 		8A7E5D6C2A79117200CA1E2C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7E5D6B2A79117200CA1E2C /* AppDelegate.swift */; };
 		8A7E5D6E2A79117200CA1E2C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7E5D6D2A79117200CA1E2C /* SceneDelegate.swift */; };
@@ -19,9 +20,12 @@
 		8A7F05E02ABC6706000E09C9 /* AboutSelfCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7F05DF2ABC6706000E09C9 /* AboutSelfCell.swift */; };
 		8A94724E2AA2019800DA191F /* UIAlert+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A94724D2AA2019800DA191F /* UIAlert+Ext.swift */; };
 		8A9472502AA246C800DA191F /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A94724F2AA246C800DA191F /* UIViewController+Ext.swift */; };
+		8AEBA1172AC47F420067C45E /* ItemList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AEBA1162AC47F420067C45E /* ItemList.swift */; };
+		8AEBA1192AC4828B0067C45E /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AEBA1182AC4828B0067C45E /* MockData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8A183C872AC49B64001FDA65 /* SkillsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillsViewController.swift; sourceTree = "<group>"; };
 		8A76C93E2A94BAC000C0554A /* UIWindow+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+Ext.swift"; sourceTree = "<group>"; };
 		8A7E5D682A79117200CA1E2C /* MiniCVApp-Serf.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MiniCVApp-Serf.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A7E5D6B2A79117200CA1E2C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -36,6 +40,8 @@
 		8A7F05DF2ABC6706000E09C9 /* AboutSelfCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSelfCell.swift; sourceTree = "<group>"; };
 		8A94724D2AA2019800DA191F /* UIAlert+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlert+Ext.swift"; sourceTree = "<group>"; };
 		8A94724F2AA246C800DA191F /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
+		8AEBA1162AC47F420067C45E /* ItemList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemList.swift; sourceTree = "<group>"; };
+		8AEBA1182AC4828B0067C45E /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +76,7 @@
 			children = (
 				8A7E5D802A79128300CA1E2C /* Sources */,
 				8A7E5D6F2A79117200CA1E2C /* ViewController.swift */,
+				8A183C872AC49B64001FDA65 /* SkillsViewController.swift */,
 				8A7E5D872A79720100CA1E2C /* TagCollectionViewCell.swift */,
 				8A7F05DF2ABC6706000E09C9 /* AboutSelfCell.swift */,
 				8A7E5D812A7912AC00CA1E2C /* Resources */,
@@ -121,6 +128,8 @@
 			isa = PBXGroup;
 			children = (
 				8A7E5D8A2A79770900CA1E2C /* Tag.swift */,
+				8AEBA1162AC47F420067C45E /* ItemList.swift */,
+				8AEBA1182AC4828B0067C45E /* MockData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -196,11 +205,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A7E5D8B2A79770900CA1E2C /* Tag.swift in Sources */,
+				8AEBA1192AC4828B0067C45E /* MockData.swift in Sources */,
 				8A7F05E02ABC6706000E09C9 /* AboutSelfCell.swift in Sources */,
 				8A76C93F2A94BAC000C0554A /* UIWindow+Ext.swift in Sources */,
 				8A7E5D842A792BB700CA1E2C /* UIView+AutoLayout.swift in Sources */,
 				8A7E5D702A79117200CA1E2C /* ViewController.swift in Sources */,
 				8A7E5D882A79720100CA1E2C /* TagCollectionViewCell.swift in Sources */,
+				8AEBA1172AC47F420067C45E /* ItemList.swift in Sources */,
+				8A183C882AC49B64001FDA65 /* SkillsViewController.swift in Sources */,
 				8A7E5D6C2A79117200CA1E2C /* AppDelegate.swift in Sources */,
 				8A94724E2AA2019800DA191F /* UIAlert+Ext.swift in Sources */,
 				8A7E5D6E2A79117200CA1E2C /* SceneDelegate.swift in Sources */,

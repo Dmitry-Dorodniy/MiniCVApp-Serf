@@ -3,18 +3,19 @@
 //  MiniCVApp-Serf
 //
 //  Created by Dmitry Dorodniy on 01.08.2023.
-//
+//  https://www.figma.com/file/xfRZ6MHiLNO9BSUN9uVhnN/iOS-%D0%97%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D1%8F?node-id=1%3A236&mode=dev
 
 import UIKit
 
 class ViewController: UIViewController {
     
-    var isEdit = false {
+    private var isEdit = false {
         didSet {
             editButton.setNeedsUpdateConfiguration()
         }
     }
     var tags = Tag.getData
+    private let sections = MockData.shared.pageData
     
     // MARK: - UI Elements
     
@@ -110,6 +111,7 @@ class ViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+//        collectionView.bounces = false
         return collectionView
     }()
     
