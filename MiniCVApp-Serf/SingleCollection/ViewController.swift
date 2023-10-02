@@ -18,15 +18,7 @@ class ViewController: UIViewController {
     private let sections = MockData.shared.pageData
     
     // MARK: - UI Elements
-    
-    private lazy var profileLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Профиль"
-        label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
-        return label
-    }()
-    
+        
     private lazy var bioStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -164,13 +156,13 @@ class ViewController: UIViewController {
     // MARK: - Setups
     private func setupView() {
         view.backgroundColor = .systemGray5
+        title = "Профиль"
         dismissKeyboard()
 //        tags = Tag.getData
     }
     
     private func setupHierarchy() {
-        view.addSubViewsForAutoLayout([profileLabel,
-                                       bioStackView,
+        view.addSubViewsForAutoLayout([bioStackView,
                                        skilsStackView,
                                        tagsCollectionView])
         
@@ -186,10 +178,10 @@ class ViewController: UIViewController {
     
     private func setupLayuot() {
         NSLayoutConstraint.activate([
-            profileLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 18),
-            profileLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//            profileLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 18),
+//            profileLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            bioStackView.topAnchor.constraint(equalTo: profileLabel.bottomAnchor, constant: 42),
+            bioStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
             bioStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 51),
             bioStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -51),
             bioStackView.heightAnchor.constraint(equalToConstant: 244),
@@ -247,5 +239,5 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
 }
 
 #Preview {
-    ViewController()
+   ViewController()
 }

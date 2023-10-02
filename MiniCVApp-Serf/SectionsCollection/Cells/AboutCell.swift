@@ -1,5 +1,5 @@
 //
-//  AboutSelfCell.swift
+//  AboutCell.swift
 //  MiniCVApp-Serf
 //
 //  Created by Dmitry Dorodniy on 21.09.2023.
@@ -7,9 +7,9 @@
 
 import UIKit
 
-class AboutSelfCell: UICollectionViewCell {
+class AboutCell: UICollectionViewCell {
     
-    static let identifire = "AboutSelfCell"
+    static let identifire = "AboutCell"
     
     private lazy var selfLabel: UILabel = {
         let label = UILabel()
@@ -43,5 +43,6 @@ class AboutSelfCell: UICollectionViewCell {
     }
     
     private func setupLayout() {
+        
     }
 }

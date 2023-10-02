@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ItemList {
+struct ItemList: Hashable {
     var image: String?
     var title: String
     var subtitle: String?
