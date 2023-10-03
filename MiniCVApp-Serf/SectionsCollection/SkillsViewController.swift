@@ -16,11 +16,14 @@ class SkillsViewController: UIViewController {
 //    }
     
     private let sections = MockData.shared.pageData
+//    private var data = MockData()
     
     private lazy var tagsCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createCollectionLayout())
         collectionView.backgroundColor = .systemBackground
-        collectionView.register(TagCollectionViewCell.self, forCellWithReuseIdentifier: TagCollectionViewCell.identifier)
+        collectionView.register(ProfileCell.self, forCellWithReuseIdentifier: ProfileCell.identifier)
+        collectionView.register(TagCell.self, forCellWithReuseIdentifier: TagCell.identifier)
+        collectionView.register(AboutCell.self, forCellWithReuseIdentifier: AboutCell.identifier)
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -94,12 +97,22 @@ extension SkillsViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.identifier, for: indexPath) as? TagCollectionViewCell else { return UICollectionViewCell() }
-        cell.configure(with: "Mock")
-        return cell
+        switch sections[indexPath.section] {
+        case .profile(let item):
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProfileCell.identifier, for: indexPath) as? ProfileCell else { return UICollectionViewCell() }
+            cell.configure(with: item[indexPath.row])
+            return cell
+        default:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCell.identifier, for: indexPath) as? TagCell else { return UICollectionViewCell() }
+            cell.configure(with: "Mock")
+            return cell
+        }
+//        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCell.identifier, for: indexPath) as? TagCell else { return UICollectionViewCell() }
+//        cell.configure(with: "Mock")
+//        return cell
     }
 }
 
-#Preview {
-    SkillsViewController()
-}
+//#Preview {
+//    SkillsViewController()
+//}

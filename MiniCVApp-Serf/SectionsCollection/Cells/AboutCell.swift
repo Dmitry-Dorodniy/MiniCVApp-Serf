@@ -9,10 +9,11 @@ import UIKit
 
 class AboutCell: UICollectionViewCell {
     
-    static let identifire = "AboutCell"
+    static let identifier = "AboutCell"
     
     private lazy var selfLabel: UILabel = {
         let label = UILabel()
+        label.text = "Experienced software engineer skilled in developing scalable and maintainable systems"
         label.font = UIFont.systemFont(ofSize: 14)
         return label
     }()
@@ -44,5 +45,8 @@ class AboutCell: UICollectionViewCell {
     
     private func setupLayout() {
         
+        NSLayoutConstraint.activate([
+            selfLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+            selfLabel.topAnchor.constraint(equalTo: topAnchor)])
     }
 }
