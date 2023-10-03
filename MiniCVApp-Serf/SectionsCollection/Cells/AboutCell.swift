@@ -18,6 +18,10 @@ class AboutCell: UICollectionViewCell {
         return label
     }()
     
+    func configure(with text: String) {
+        selfLabel.text = text
+    }
+    
     
     // MARK: - Lifecycle
     

@@ -36,7 +36,7 @@ enum Section {
     var title: String {
         switch self {
         case .profile(_):
-            "Профиль"
+            ""
         case .skills(_):
             "Мои навыки"
         case .about(_):

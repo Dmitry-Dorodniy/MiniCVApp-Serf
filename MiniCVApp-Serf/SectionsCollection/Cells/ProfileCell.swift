@@ -33,6 +33,7 @@ class ProfileCell: UICollectionViewCell {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.alignment = .fill
+        stackView.spacing = 12
         return stackView
     }()
     
@@ -51,6 +52,7 @@ class ProfileCell: UICollectionViewCell {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         label.text = "Таганрог"
+        label.textAlignment = .center
         label.textColor = .systemGray
         label.numberOfLines = 1
         
@@ -75,6 +77,8 @@ class ProfileCell: UICollectionViewCell {
     
     // MARK: - Setups
     private func setupHierarchy() {
+        descriptionStackView.addArrangedSubview(descriptionLabel)
+        descriptionStackView.addArrangedSubview(cityLabel)
         contentView.addSubViewsForAutoLayout([iconView,
                                               nameLabel,
                                               descriptionStackView])
@@ -84,7 +88,7 @@ class ProfileCell: UICollectionViewCell {
         
         NSLayoutConstraint.activate([
             iconView.topAnchor.constraint(equalTo: topAnchor),
-            iconView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            iconView.centerXAnchor.constraint(equalTo: centerXAnchor),
             iconView.widthAnchor.constraint(equalToConstant: 150),
             iconView.heightAnchor.constraint(equalToConstant: 150),
             
